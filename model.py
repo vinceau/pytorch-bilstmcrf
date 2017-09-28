@@ -136,7 +136,7 @@ class CRF(nn.Module):
         # (except the last ones)
         trn_exp = trn.unsqueeze(0).expand(batch_size, *trn.size())
         lbl_r = labels[:, 1:]
-        lbl_rexp = lbl_r.unsqueeze(-1).expand(*lbl_r.size(), trn.size(0))
+        lbl_rexp = lbl_r.unsqueeze(-1).expand(lbl_r.size()[0], lbl_r.size()[1], trn.size(0))
         trn_row = torch.gather(trn_exp, 1, lbl_rexp)
 
         # obtain transition score from the transition vector for each label
